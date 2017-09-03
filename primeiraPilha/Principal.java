@@ -6,8 +6,7 @@ public class Principal {
         p1.size();
         p1.push(5);
         p1.push("A");
-        
-               
+           
         p1.show();
     }
     
