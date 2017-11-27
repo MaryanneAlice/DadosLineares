@@ -29,7 +29,7 @@ public class Main {
         bst.insert(11, 10);
         bst.insert(10, 11);
         bst.insert(13, 12);
-        bst.insert(14, 13);
+       
         
         bst.showTree();
         System.out.println("height: " + bst.height(bst.root()));
