@@ -154,18 +154,18 @@ public class ArvorePesquisa {
         No pai;
         Object o = null;
         
-        // Encontrou a chave
+        
         if (c == chave(no)) {
             pai = no.pai();
             
-            // Não tem filhos
+            // sem filhos
             if (isExternal(no)) {
                 if (chave(no) < chave(pai))
                     pai.setFilhoEsquerdo(null);
                 else
                     pai.setFilhoDireito(null);
                 
-            // Só tem filho na esquerda
+            // filho na esquerda
             } else if (no.filhoEsquerdo() != null && no.filhoDireito() == null) {
                 if (chave(no) < chave(pai))
                     pai.setFilhoEsquerdo(no.filhoEsquerdo());
@@ -185,7 +185,7 @@ public class ArvorePesquisa {
                 no.filhoDireito().setPai(pai);
                 no.setFilhoDireito(null);
                 
-            // Tem dois filhos
+            // dois filhos
             } else if (no.filhoEsquerdo() != null && no.filhoDireito() != null) {
                 nos.clear();
                 inOrder(no.filhoDireito(), nos);
