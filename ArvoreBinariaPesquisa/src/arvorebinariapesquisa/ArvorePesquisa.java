@@ -81,7 +81,7 @@ public class ArvorePesquisa {
         return r;
     }    
     
-    public int depth(No no) {
+    public int depth (No no) {
         if (no == raiz) {
             return 0;
         }
@@ -89,137 +89,9 @@ public class ArvorePesquisa {
     }
     
     public void swap(No x, No y) {
-        x.setElement(y.element());
-        x.setKey(y.key());
-    }
-    
-    public No find(int k) {
-        return treeSearch(k, raiz);
-    }
-    
-    public No treeSearch(int c, No no) {
-        if (isExternal(no) || c == chave(no)) {
-            return no;
-        } else if (c < chave(no)) {
-            if (esquerda(no) != null)
-                return treeSearch(c, esquerda(no));
-            return no;
-        } else {
-            if (direita(no) != null)
-                return treeSearch(c, direita(no));
-            return no;
-        }
-    }
-    
-    public void insert(int k, Object o) {
-        No v = find(k);
-        if (k < chave(v)){
-            No w = new No(v, null, null, k, o);
-            v.setFilhoEsquerdo(w);
-            tamanho++;
-        } else if (k > chave(v)) {
-            No w = new No(v, null, null, k, o);
-            v.setFilhoDireito(w);
-            tamanho++;
-        } else {
-            v.setElement(o);
-        }
-    }
-    
-    public Iterator nodes() {
-        ArrayList<No> no = new ArrayList() ;
-        inOrder(raiz, no);
-        return no.iterator();
-    }
-    
-    public void inOrder(No no, ArrayList<No> nos) {
-        if (isInternal(no) && no.filhoEsquerdo() != null)
-            inOrder(no.filhoEsquerdo(), nos);
-        
-        nos.add(no);
-        
-        if (isInternal(no) && no.filhoDireito() != null)
-            inOrder(no.filhoDireito(), nos);
-    }
-    
-    public void remove(int c) {
-        if (removeNode(c) != null){
-            removeNode(c);
-            tamanho--;
-        }
-    } 
-    
-    public Object removeNode(int c) {
-        No no = find(c);
-        No pai;
-        Object o = null;
-        
-        
-        if (c == chave(no)) {
-            pai = no.pai();
-            
-            // sem filhos
-            if (isExternal(no)) {
-                if (chave(no) < chave(pai))
-                    pai.setFilhoEsquerdo(null);
-                else
-                    pai.setFilhoDireito(null);
-                
-            // filho na esquerda
-            } else if (no.filhoEsquerdo() != null && no.filhoDireito() == null) {
-                if (chave(no) < chave(pai))
-                    pai.setFilhoEsquerdo(no.filhoEsquerdo());
-                else
-                    pai.setFilhoDireito(no.filhoEsquerdo());
-                
-                no.filhoEsquerdo().setPai(pai);
-                no.setFilhoEsquerdo(null);
-                
-            // Só tem filho na direita
-            } else if (no.filhoEsquerdo() == null && no.filhoDireito() != null) {
-                if (chave(no) < chave(pai))
-                    pai.setFilhoEsquerdo(no.filhoDireito());
-                else
-                    pai.setFilhoDireito(no.filhoDireito());
-                
-                no.filhoDireito().setPai(pai);
-                no.setFilhoDireito(null);
-                
-            // dois filhos
-            } else if (no.filhoEsquerdo() != null && no.filhoDireito() != null) {
-                nos.clear();
-                inOrder(no.filhoDireito(), nos);
-                //TreeNode w = v.rightChild().leftChild() != null ? v.rightChild().leftChild() : v.rightChild();
-                No w = nos.get(0);
-                removeNode(chave(w));
-                swap(no, w);
-            }
-            
-            o = no.element();
-            no = null;
-        }
-        return o;
-    }
-    
-    public void setPositions(No[][] t) {
-        int i = 0;
-        No v;
-        for (Iterator<No> w = nodes(); w.hasNext(); ++i) {
-            v = w.next();
-            t[depth(v)][i] = v;
-        }
-    }
-    
-    public void showTree() {
-        No[][] t = new No[height(raiz) + 1][tamanho];
-        setPositions(t);
-        for (int j = 0; j < t.length; ++j) {
-            for (int i = 0; i < t[j].length; ++i) {
-                System.out.print(" ");
-                System.out.print(t[j][i] != null ? t[j][i].key() : " ");
-            }
-            System.out.println();
-        }
+         No aux = x;
+         x = y;
+         y = aux;
     }
     
 }
